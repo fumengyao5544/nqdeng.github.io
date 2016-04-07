@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello React!</title>
+  <script src="build/react.js"></script>
+  <script src="build/react-dom.js"></script>
+  <script src="bower_components/seajs/dist/sea.js"></script>
+</head>
+<body>
+  <p>Content below is rendered by React.</p>
+  <div id="foo"></div>
+  <script>
+    seajs.use('./test', function (test) {
+      var xhr = new XMLHttpRequest();
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          test.render(JSON.parse(xhr.responseText));
+        }
+      };
+
+      xhr.open("GET", "data.json", true);
+      xhr.send();
+    });
+  </script>
+</body>
+</html>
