@@ -14,14 +14,17 @@
     seajs.use('./test', function (test) {
       var xhr = new XMLHttpRequest();
 
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          test.render(JSON.parse(xhr.responseText));
-        }
-      };
+      
+      setTimeout(function () {
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            test.render(JSON.parse(xhr.responseText));
+          }
+        };
 
-      xhr.open("GET", "data.json", true);
-      xhr.send();
+        xhr.open("GET", "data.json", true);
+        xhr.send();
+      }, 3000);
     });
   </script>
 </body>
